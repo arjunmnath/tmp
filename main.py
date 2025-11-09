@@ -218,7 +218,7 @@ def main():
                                  num_warmup_steps=int(0.03 * num_training_steps),
                                  num_training_steps=num_training_steps)
 
-    scaler = torch.cuda.amp.GradScaler(enabled=(device.type == "cuda"))
+    scaler = torch.amp.GradScaler('cuda', enabled=(device.type == "cuda"))
 
     os.makedirs(args.save_dir, exist_ok=True)
     best_val_f1 = -1.0
