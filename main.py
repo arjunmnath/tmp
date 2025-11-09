@@ -86,7 +86,7 @@ def train_one_epoch(model, dataloader, optimizer, device, scaler, lr_scheduler=N
         pixel_values = batch["pixel_values"].to(device, non_blocking=True)
         labels = batch["labels"].to(device, non_blocking=True)
         optimizer.zero_grad()
-        with torch.cuda.amp.autocast(enabled=(scaler is not None)):
+        with torch.amp.autocast('cuda', enabled=(scaler is not None)):
             out = model(pixel_values=pixel_values, labels=labels)
             loss = out.loss
         if scaler is not None:
